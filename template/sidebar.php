@@ -54,8 +54,8 @@
               </span>
             </a>
           </li>
-          <li><a href="<?= base_url(); ?>mail/crear">Crear</a></li>
-          <li><a href="<?= base_url(); ?>mail/leer">Leer</a></li>
+          <li><a href="<?= base_url(); ?>mail/crear_correo">Crear</a></li>
+          <li><a href="<?= base_url(); ?>mail/leer_correo">Leer</a></li>
         </ul>
       </li>
       <li>

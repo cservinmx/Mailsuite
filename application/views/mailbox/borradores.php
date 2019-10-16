@@ -4,38 +4,22 @@ $current="mailbox";
 if (!isset($this->session->userdata['logged_in'])) {
 	header("Location: login");
 }
-
-//The location of the mailbox.
-$mailbox = '{mail.legaltracking.mx:993/imap/ssl}INBOX';
-//The username / email address that we want to login to.
-$username = $this->session->userdata['logged_in']['email'];
-//The password for this email address.
-$password = base64_decode($this->session->userdata['logged_in']['pass']);
-$imapResource = imap_open($mailbox, $username, $password);
 ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 	<section class="content-header">
 		<h1>
 			Mailbox
-			<small><?= $num_msg ?> Mensajes</small>
+			<small><?= $num_msg; ?> messages</small>
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li class="active">Mailbox</li>
+			<li class="active">Borradores</li>
 		</ol>
 	</section>
 <!-- Main content -->
 <section class="content">
 	<div class="row">
-
-		<?php if($imapResource === false){
-		    //If it failed, throw an exception that contains
-		    //the last imap error.
-		    throw new Exception(imap_last_error());
-				}
-				$emails = imap_search($imapResource, 'ALL');
-		  ?>
 		<div class="col-md-3">
 			<a href="<?= base_url(); ?>Mail/crear_correo" class="btn btn-primary btn-block margin-bottom">Nuevo correo</a>
 
@@ -50,10 +34,10 @@ $imapResource = imap_open($mailbox, $username, $password);
 				</div>
 				<div class="box-body no-padding">
 					<ul class="nav nav-pills nav-stacked">
-						<li class="active"><a href="#"><i class="fa fa-inbox"></i> Inbox
+						<li><a href="<?= base_url(); ?>Mail/index"><i class="fa fa-inbox"></i> Inbox
 							<span class="label label-primary pull-right">12</span></a></li>
 						<li><a href="#"><i class="fa fa-envelope-o"></i> Sent</a></li>
-						<li><a href="<?php base_url(); ?>/mail/borradores"><i class="fa fa-file-text-o"></i> Borradores</a></li>
+						<li class="active"><a href="#"><i class="fa fa-file-text-o"></i> Borradores</a></li>
 						<li><a href="#"><i class="fa fa-filter"></i> Junk <span class="label label-warning pull-right">65</span></a>
 						</li>
 						<li><a href="#"><i class="fa fa-trash-o"></i> Trash</a></li>
@@ -86,7 +70,7 @@ $imapResource = imap_open($mailbox, $username, $password);
 		<div class="col-md-9">
 			<div class="box box-primary">
 				<div class="box-header with-border">
-					<h3 class="box-title">Inbox</h3>
+					<h3 class="box-title">Borradores</h3>
 
 				<!--	<div class="box-tools pull-right">
 						<div class="has-feedback">
